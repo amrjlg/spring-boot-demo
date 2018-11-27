@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script type="text/javascript" src="//cdn.yuansuju.com/sockjs/sockjs-client/blob/master/dist/sockjs.js"></script>-->
+    <script type="text/javascript" src="//cdn.yuansuju.com/web-socket-js/1.0.0/web_socket.js"></script>
+</head>
+<body>
+
+
+
+<script type="text/javascript">
+    var webSocket;
+    if ('WebSocket' in window) {
+        webSocket = new WebSocket("ws://" + document.location.host + "/message");
+    } else if ('MozWebSocket' in window) {
+        webSocket = new MozWebSocket("ws://" + document.location.host + "/message");
+    } else {
+        webSocket = new SockJS("http://" + document.location.host + "/js/message");
+    }
+    webSocket.onopen = function(evnt) {
+        console.log(evnt)
+    };
+    webSocket.onmessage = function(evnt) {
+        console.log(evnt)
+    };
+
+    webSocket.onerror = function(evnt) {
+        console.log(evnt)
+    };
+    webSocket.onclose = function(evnt) {
+        console.log(evnt)
+    }
+</script>
+</body>
+</html>

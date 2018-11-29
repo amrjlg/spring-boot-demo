@@ -1,5 +1,7 @@
 package com.jiang.demo.config;
 
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -10,6 +12,7 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
@@ -26,7 +29,12 @@ public class CacheConfig {
     public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         RedisCacheManager.RedisCacheManagerBuilder cacheManagerBuilder = RedisCacheManager.RedisCacheManagerBuilder.fromConnectionFactory(connectionFactory);
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
-        FastJsonRedisSerializer jsonRedisSerializer = new FastJsonRedisSerializer(Object.class);
+        FastJsonRedisSerializer<Object> jsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
+        FastJsonConfig fastJsonConfig = new FastJsonConfig();
+        fastJsonConfig.setCharset(StandardCharsets.UTF_8);
+        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
+        fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteDateUseDateFormat);
+        jsonRedisSerializer.setFastJsonConfig(fastJsonConfig);
         redisCacheConfiguration = redisCacheConfiguration
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jsonRedisSerializer))
                 .entryTtl(Duration.of(60, ChronoUnit.MINUTES));

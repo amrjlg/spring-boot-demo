@@ -1,13 +1,16 @@
 package com.jiang.demo.config;
 
 
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author Jiang
@@ -21,10 +24,16 @@ public class RedisConfig {
     public RedisTemplate<String,Object> redisTemplate(JedisConnectionFactory factory){
         RedisTemplate<String,Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(factory);
-        RedisSerializer serializer = new FastJsonRedisSerializer(Object.class);
+        FastJsonRedisSerializer<Object> serializer = new FastJsonRedisSerializer<>(Object.class);;
+        FastJsonConfig fastJsonConfig = new FastJsonConfig();
+        fastJsonConfig.setCharset(StandardCharsets.UTF_8);
+        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
+        fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteDateUseDateFormat);
+        serializer.setFastJsonConfig(fastJsonConfig);
         redisTemplate.setValueSerializer(serializer);
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setDefaultSerializer(serializer);
+        redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
 }

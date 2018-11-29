@@ -49,7 +49,7 @@ public class RedisController {
 
     @GetMapping("/date.json")
     public Date date() {
-        valueOperations.set("time",new Date());
+        valueOperations.set("time",new Date(),60,TimeUnit.SECONDS);
         Object time = get("time");
         return (Date) time;
     }

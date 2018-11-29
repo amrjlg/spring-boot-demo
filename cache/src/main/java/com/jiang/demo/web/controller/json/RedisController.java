@@ -1,12 +1,18 @@
 package com.jiang.demo.web.controller.json;
 
+import com.jiang.demo.dao.FileRepository;
+import com.jiang.demo.web.entity.YuansujuFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,16 +25,45 @@ import java.util.concurrent.TimeUnit;
 public class RedisController {
 
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private FileRepository fileRepository;
+
+    @PostConstruct
+    public void init(){
+        valueOperations = redisTemplate.opsForValue();
+    }
+
+    @Autowired
+    private RedisTemplate<String,Object> redisTemplate;
+    ValueOperations<String,Object> valueOperations;
 
     @GetMapping("/put.json")
     public boolean put(@RequestParam("key") String key, @RequestParam("value") String value) {
-        redisTemplate.opsForValue().set(key, value, 60, TimeUnit.SECONDS);
+        valueOperations.set(key, value, 60, TimeUnit.SECONDS);
         return true;
     }
 
     @GetMapping("/get.json")
-    public String get(@RequestParam("key") String key) {
+    public Object get(@RequestParam("key") String key) {
         return redisTemplate.opsForValue().get(key);
+    }
+
+    @GetMapping("/date.json")
+    public Date date() {
+        valueOperations.set("time",new Date());
+        Object time = get("time");
+        return (Date) time;
+    }
+
+    @GetMapping("/file/{id}.json")
+    public YuansujuFile file(@PathVariable("id")String id ){
+        YuansujuFile file = (YuansujuFile) valueOperations.get(id);
+        if(null == file){
+            Optional<YuansujuFile> fileOptional = fileRepository.findById(Long.valueOf(id));
+            if(fileOptional.isPresent()){
+                file=fileOptional.get();
+                valueOperations.set(id,file);
+            }
+        }
+        return  file;
     }
 }

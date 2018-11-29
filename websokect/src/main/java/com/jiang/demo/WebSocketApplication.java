@@ -1,7 +1,7 @@
 package com.jiang.demo;
 
-import com.jiang.demo.config.MessageWebSocketHandler;
-import com.jiang.demo.config.WebSocketSever;
+import com.jiang.demo.websokect.config.MessageWebSocketHandler;
+import com.jiang.demo.websokect.config.WebSocketSever;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

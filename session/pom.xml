@@ -9,12 +9,23 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>websokect</artifactId>
+    <artifactId>session</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
+            <groupId>com.jiang.demo</groupId>
+            <artifactId>swagger-module</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jiang.demo</groupId>
+            <artifactId>redis-config</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+            <version>2.1.2.RELEASE</version>
         </dependency>
     </dependencies>
     <build>
@@ -25,4 +36,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

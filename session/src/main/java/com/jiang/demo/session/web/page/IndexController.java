@@ -1,8 +1,10 @@
 package com.jiang.demo.session.web.page;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +16,11 @@ import java.util.Map;
  */
 @RestController
 public class IndexController {
+    @Autowired
+    private HttpServletRequest request;
     @GetMapping("/session/id.json")
-    public Map<String,Object> sessionId(HttpSession session){
+    public Map<String,Object> sessionId(){
+        HttpSession session = request.getSession();
         return new HashMap<String, Object>(){{
             put("sessionId",session.getId());
         }};

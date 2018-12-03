@@ -13,6 +13,7 @@
         <module>session</module>
         <module>swagger-module</module>
         <module>redis-config</module>
+        <module>mybatis</module>
     </modules>
 
     <packaging>pom</packaging>

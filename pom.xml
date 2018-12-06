@@ -14,6 +14,8 @@
         <module>swagger-module</module>
         <module>redis-config</module>
         <module>mybatis</module>
+        <module>jpa</module>
+        <module>mybatis-generator</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -43,6 +45,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="default-context" defaultModelType="flat" targetRuntime="MyBatis3">
+        <!--是否自动为keywords添加分隔符  TRUE  添加-->
+        <property name="autoDelimitKeywords" value="true"/>
+
+        <!--分隔符-->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="com.jiang.demo.generator.plugs.MapperPlug"/>
+        <!--注释配置-->
+        <commentGenerator>
+            <!--是否生成注释-->
+            <property name="suppressAllComments" value="false"/>
+            <!--是否添加文件生成时间-->
+            <property name="suppressDate" value="false"/>
+            <!--是否添加注释-->
+            <property name="addRemarkComments" value="true"/>
+            <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/world?useSSL=true">
+            <property name="user" value="root"/>
+            <property name="password" value="0231625530"/>
+        </jdbcConnection>
+        <javaTypeResolver>
+            <!--是否需要将数字映射为BigDecimal-->
+            <property name="forceBigDecimals" value="true" />
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="com.jiang.demo.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="mybatis"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.demo.mapper"  targetProject="src/main/java">-->
+            <!--<property name="rootInterface" value="com.jiang.demo.BaseMapper"/>-->
+        <!--</javaClientGenerator>-->
+        <table tableName="city"></table>
+    </context>
+</generatorConfiguration>

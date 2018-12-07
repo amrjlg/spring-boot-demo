@@ -17,15 +17,10 @@ package com.jiang;
 
 import com.jiang.mybatis.mapper.TestMapper;
 import com.jiang.mybatis.model.TestObject;
-import org.apache.ibatis.builder.StaticSqlSource;
 import org.apache.ibatis.builder.xml.XMLMapperBuilder;
 import org.apache.ibatis.datasource.unpooled.UnpooledDataSource;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.logging.log4j.Log4jImpl;
 import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.mapping.SqlCommandType;
-import org.apache.ibatis.parsing.XNode;
 import org.apache.ibatis.session.*;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.junit.Before;
@@ -34,10 +29,8 @@ import org.junit.Test;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Jiang
@@ -47,7 +40,7 @@ import java.util.Map;
 public class App {
     SqlSessionFactory sqlSessionFactory;
     final String driver = "com.mysql.jdbc.Driver";
-    final String url = "jdbc:mysql://127.0.0.1:3306/seckill?useUnicode=true&characterEncoding=utf8&useSSL=false";
+    final String url = "jdbc:mysql://127.0.0.1:3306/world?useUnicode=true&characterEncoding=utf8&useSSL=false";
     final String username = "root";
     final String password = "0231625530";
 
@@ -61,13 +54,10 @@ public class App {
         configuration.setMapUnderscoreToCamelCase(true);
         configuration.setUseColumnLabel(true);
         configuration.setLogImpl(Log4jImpl.class);
-        configuration.addMapper(TestMapper.class);
-
-//        XMLMapperBuilder xmlMapperBuilder = new XMLMapperBuilder(Resources.getResourceAsStream("mybatis/TestMapper.xml"),
-//                configuration, "mybatis/TestMapper.xml",
-//                new HashMap<>());
-//        xmlMapperBuilder.parse();
+        configuration.addMapper(CityMapper.class);
         loadMapperXml("mybatis", configuration);
+//        InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("mybatis/CityMapper.xml");
+//        new XMLMapperBuilder(resourceAsStream, configuration, "mybatis/CityMapper.xml", new HashMap<>()).parse();
         SqlSessionFactoryBuilder factoryBuilder = new SqlSessionFactoryBuilder();
         sqlSessionFactory = factoryBuilder.build(configuration);
     }
@@ -76,17 +66,13 @@ public class App {
     public void session() {
 
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        TestMapper mapper = sqlSession.getMapper(TestMapper.class);
-        TestObject testObject = mapper.selectOne(1000);
-        System.out.println(testObject);
+//        CityMapper mapper = sqlSession.getMapper(CityMapper.class);
+//        List<City> cities = mapper.selectByExample(null);
+//        cities.forEach(city -> System.out.println(city.getName()));
 
+        TestMapper mapper = sqlSession.getMapper(TestMapper.class);
         List<TestObject> testObjects = mapper.selectAll();
-        if (null != testObjects) {
-            for (TestObject o :
-                    testObjects) {
-                System.out.println(o);
-            }
-        }
+        testObjects.forEach(System.out::println);
     }
 
 

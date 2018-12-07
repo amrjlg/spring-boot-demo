@@ -6,6 +6,7 @@ import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.config.JavaModelGeneratorConfiguration;
 import org.mybatis.generator.internal.ObjectFactory;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,41 +25,52 @@ public class MapperPlug extends PluginAdapter {
 
     @Override
     public List<GeneratedJavaFile> contextGenerateAdditionalJavaFiles(IntrospectedTable introspectedTable) {
+        String baseMapper = context.getProperties().getProperty("baseMapper");
+        String mapperPackage = context.getProperties().getProperty("mapperPackage");
+        String mapperTarget = context.getProperties().getProperty("mapperTarget");
 
         List<GeneratedJavaFile> mappers = new ArrayList<>();
         JavaModelGeneratorConfiguration configuration = context.getJavaModelGeneratorConfiguration();
-        String targetPackage = configuration.getTargetPackage();
-        String targetProject = configuration.getTargetProject();
+        String modelPackage = configuration.getTargetPackage();
         String modelName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
+        if (StringUtils.isEmpty(mapperTarget)){
+            mapperTarget =configuration.getTargetProject();
+        }
         List<IntrospectedColumn> primaryKeyColumns = introspectedTable.getPrimaryKeyColumns();
         IntrospectedColumn column = primaryKeyColumns.get(0);
         FullyQualifiedJavaType javaType = column.getFullyQualifiedJavaType();
-        String shortName = javaType.getShortName();
-        String packageName = javaType.getPackageName();
-        String mapperName =formatterMapperName(modelName);
-        System.out.println(mapperName);
+        String primaryKeyTypeName = javaType.getShortName();
+        String primaryKeyTypePackage = javaType.getPackageName();
+        String mapperName =formatterMapperName(mapperPackage,modelName);
+        try {
+            Class<?> name = Class.forName(mapperName);
+            if (null !=name){
+                return mappers;
+            }
+        }catch (Exception e){
+
+        }
         Interface mapper = new Interface(mapperName);
-        //主键
-        System.out.println(packageName+"."+shortName);
-        mapper.addImportedType( new FullyQualifiedJavaType(packageName+"."+shortName));
-        //Model
-        mapper.addImportedType( new FullyQualifiedJavaType(targetPackage+"."+modelName));
-        //Example
-        mapper.addImportedType(new FullyQualifiedJavaType(targetPackage+"."+modelName+"Example"));
-
-        mapper.addImportedType(new FullyQualifiedJavaType("com.jiang.demo.BaseMapper"));
-
         mapper.setVisibility(JavaVisibility.PUBLIC);
-
-        mapper.addSuperInterface(new FullyQualifiedJavaType(String.format("BaseMapper<%s,%s,%sExample>",modelName,shortName,modelName)));
+        //主键
+        System.out.println(primaryKeyTypePackage+"."+primaryKeyTypeName);
+        mapper.addImportedType( new FullyQualifiedJavaType(primaryKeyTypePackage+"."+primaryKeyTypeName));
+        //Model
+        mapper.addImportedType( new FullyQualifiedJavaType(modelPackage+"."+modelName));
+        //Example
+        mapper.addImportedType(new FullyQualifiedJavaType(modelPackage+"."+modelName+"Example"));
+        //导入Mapper父类
+        mapper.addImportedType(new FullyQualifiedJavaType(baseMapper));
+        //添加继承
+        mapper.addSuperInterface(new FullyQualifiedJavaType(String.format("BaseMapper<%s,%s,%sExample>",modelName,primaryKeyTypeName,modelName)));
 
         JavaFormatter javaFormatter = ObjectFactory.createJavaFormatter(context) ;
-        GeneratedJavaFile generatedJavaFile = new GeneratedJavaFile(mapper, targetProject, javaFormatter);
+        GeneratedJavaFile generatedJavaFile = new GeneratedJavaFile(mapper, mapperTarget, javaFormatter);
         mappers.add(generatedJavaFile);
         return mappers;
     }
 
-    private String formatterMapperName(String modelName){
-        return String.format("com.jiang.demo.mapper.%sMapper",modelName);
+    private String formatterMapperName(String mapperPakage,String modelName){
+        return String.format("%s.%sMapper",mapperPakage,modelName);
     }
 }

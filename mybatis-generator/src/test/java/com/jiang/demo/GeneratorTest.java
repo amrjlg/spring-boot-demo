@@ -1,7 +1,10 @@
 package com.jiang.demo;
 
+import com.jiang.demo.generator.callback.GeneratorShellCallback;
 import org.junit.Test;
 import org.mybatis.generator.api.MyBatisGenerator;
+import org.mybatis.generator.api.ProgressCallback;
+import org.mybatis.generator.api.ShellCallback;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
@@ -20,11 +23,11 @@ public class GeneratorTest {
 
     @Test
     public void generator() throws Exception {
-        List<String> warnings = new ArrayList<String>();
+        List<String> warnings = new ArrayList<>();
         boolean overwrite = true;
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(getClass().getClassLoader().getResourceAsStream(location));
-        DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+        GeneratorShellCallback callback = new GeneratorShellCallback(overwrite);
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
         myBatisGenerator.generate(null);
 

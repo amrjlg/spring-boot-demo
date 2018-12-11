@@ -36,8 +36,7 @@ public class CommentGenerator extends DefaultCommentGenerator {
             return;
         }
         List<Attribute> attributes = rootElement.getAttributes();
-        List<Attribute> namespaces = new ArrayList<>();
-        attributes.forEach(namespaces::add);
+        List<Attribute> namespaces = new ArrayList<>(attributes);
 
         attributes.clear();
         namespaces.forEach(namespace -> {

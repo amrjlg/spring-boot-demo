@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+<generatorConfiguration>
+	<!-- 驱动包 -->
+	<classPathEntry location="E:\.m2\repository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
+	<context id="MySqlTables" targetRuntime="MyBatis3" introspectedColumnImpl="com.xsm.commo.mybatis.generator.SimpleIntrospectedColumn">
+		<!-- 自动识别数据库关键字，默认false -->
+		<property name="autoDelimitKeywords" value="true" />
+		<!--可以使用``包括字段名，避免字段名与sql保留字冲突报错 -->
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+		
+		<property name="javaFileEncoding" value="UTF8" />
+
+
+		<!-- @mbggenerated 生成的配置-->
+		<property name="suppressDate" value="true" />
+		
+		<!-- include the plugin -->
+		<plugin type="com.xsm.commo.mybatis.generator.SimpleGeneratorPlugin" />
+
+		<!--生成service层插件-->
+		<plugin type="com.xsm.commo.mybatis.generator.ServiceCodePlugin" >
+			<property name="targetProject" value="src\main\java"/>
+			<property name="targetPackage" value="com.yuansuju.basesystem.service"/>
+			<property name="managerRootInterface" value="com.yuansuju.basesystem.common.mybatis.manager.Manager" />
+		</plugin>
+
+		<commentGenerator type="com.xsm.commo.mybatis.generator.SimpleCommentGenerator">
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<!-- 数据库连接 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://git.yuansuju.com:3306/yuansuju?useUnicode=true&amp;characterEncoding=UTF8&amp;autoReconnect=true"
+			userId="root" password="Xihe123456">
+		</jdbcConnection>
+		
+    	<!-- model的配置  -->
+		<javaModelGenerator targetPackage="com.yuansuju.basesystem.dao.model" targetProject="src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true"/>
+			<property name="exampleRootClass" value="com.yuansuju.basesystem.common.mybatis.model.ModelExample" />
+		</javaModelGenerator>
+		
+		<!--mybatis的xml的配置  -->
+		<sqlMapGenerator targetPackage="mybatis.mapper" targetProject="src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		
+		<!--mapper的配置  -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.yuansuju.basesystem.dao.mapper" targetProject="src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="clientRootInterface" value="com.yuansuju.basesystem.common.mybatis.mapper.Mapper" />
+		</javaClientGenerator>
+		<!-- <table tableName="yuansuju_user" domainObjectName="YuansujuUser"></table> -->
+		<!-- <table tableName="yuansuju_user_sanfang" domainObjectName="YuansujuUserSanfang"></table> -->
+		<!-- <table tableName="yuansuju_user_sanfang_openid" domainObjectName="YuansujuUserSanfangOpenid"></table> -->
+		<!-- <table tableName="yuansuju_smscode" domainObjectName="YuansujuSmscode"></table> -->
+		<!-- <table tableName="yuansuju_smsip_rec" domainObjectName="YuansujuSmsipRec"></table> -->
+		<!-- <table tableName="yuansuju_h5_resource" domainObjectName="YuansujuH5Resource"></table>-->
+		<!-- <table tableName="yuansuju_shipping_address" domainObjectName="YuansujuShippingAddress"></table> -->
+		<!-- <table tableName="yuansuju_installation_company" domainObjectName="YuansujuInstallationCompany"></table> -->
+		<!-- <table tableName="yuansuju_product_type" domainObjectName="YuansujuProductType"></table> -->
+		<!-- <table tableName="yuansuju_supplier" domainObjectName="YuansujuSupplier"></table> -->
+		<!-- <table tableName="yuansuju_product" domainObjectName="YuansujuProduct"></table> -->
+		<!-- <table tableName="yuansuju_product_temp" domainObjectName="YuansujuProductTemp"></table> -->
+		<!-- <table tableName="yuansuju_product_audit_timer" domainObjectName="YuansujuProductAuditTimer"></table> -->
+		<!-- <table tableName="yuansuju_product_footprints" domainObjectName="YuansujuProductFootprints"></table>-->
+		<!-- <table tableName="yuansuju_product_parameter" domainObjectName="YuansujuProductParameter"></table> -->
+		<!-- <table tableName="yuansuju_product_sku" domainObjectName="YuansujuProductSku"></table> -->
+		<!-- <table tableName="yuansuju_product_sku_items" domainObjectName="YuansujuProductSkuItems"></table> -->
+		<!-- <table tableName="yuansuju_product_sku_name" domainObjectName="YuansujuProductSkuName"></table> -->
+		<!-- <table tableName="yuansuju_product_sku_name_temp" domainObjectName="YuansujuProductSkuNameTemp"></table> -->
+		<!-- <table tableName="yuansuju_product_sku_value" domainObjectName="YuansujuProductSkuValue"></table> -->
+		<!-- <table tableName="yuansuju_product_sku_value_temp" domainObjectName="YuansujuProductSkuValueTemp"></table> -->
+		<!-- <table tableName="admin_operator" domainObjectName="AdminOperator"></table> -->
+		<!-- <table tableName="admin_role" domainObjectName="AdminRole"></table> -->
+		<!-- <table tableName="admin_tree" domainObjectName="AdminTree"></table>-->
+		<!-- <table tableName="admin_role_tree" domainObjectName="AdminRoleTree"></table> -->
+		<!-- <table tableName="yuansuju_brand" domainObjectName="YuansujuBrand"></table> -->
+		<!-- <table tableName="yuansuju_ht_file" domainObjectName="YuansujuHtFile"></table> -->
+		<!-- <table tableName="yuansuju_user_redpackets_rec" domainObjectName="YuansujuUserRedpacketsRec"></table> -->
+		<!-- <table tableName="admin_operate_log" domainObjectName="AdminOperateLog"></table> -->
+		<!-- <table tableName="admin_area_code" domainObjectName="AdminAreaCode"></table> -->
+		<!-- <table tableName="yuansuju_banner" domainObjectName="YuansujuBanner"></table> -->
+		<!-- <table tableName="yuansuju_banner_loc" domainObjectName="YuansujuBannerLoc"></table> -->
+		<!-- <table tableName="yuansuju_buy_car" domainObjectName="YuansujuBuyCar"></table> -->
+		<!-- <table tableName="yuansuju_collect" domainObjectName="YuansujuCollect"></table> -->
+		<!-- <table tableName="yuansuju_product_comment" domainObjectName="YuansujuProductComment"></table> -->
+		<!-- <table tableName="yuansuju_pay_config" domainObjectName="YuansujuPayConfig"></table> -->
+		<!-- <table tableName="yuansuju_pay_order" domainObjectName="YuansujuPayOrder"></table> -->
+		<!-- <table tableName="yuansuju_pay_order_no" domainObjectName="YuansujuPayOrderNo"></table> -->
+		<!-- <table tableName="yuansuju_product_pay_order" domainObjectName="YuansujuProductPayOrder"></table> -->
+		<!-- <table tableName="yuansuju_user_invoice" domainObjectName="YuansujuUserInvoice"></table> -->
+		<!-- <table tableName="yuansuju_product_audit_records" domainObjectName="YuansujuProductAuditRecords"></table> -->
+		<!-- <table tableName="yuansuju_order_setting" domainObjectName="YuansujuOrderSetting"></table> -->
+		<!-- <table tableName="yuansuju_engineer_area" domainObjectName="YuansujuEngineerArea"></table> -->
+		<!-- <table tableName="yuansuju_engineer_huxing" domainObjectName="YuansujuEngineerHuxing"></table> -->
+		<!-- <table tableName="yuansuju_engineer_type" domainObjectName="YuansujuEngineerType"></table> -->
+		<!-- <table tableName="yuansuju_engineer_submit" domainObjectName="YuansujuEngineerSubmit"></table> -->
+		<!-- <table tableName="yuansuju_engineer_intention_remarks" domainObjectName="YuansujuEngineerIntentionRemarks"></table> -->
+		<!-- <table tableName="yuansuju_log_userlogin" domainObjectName="YuansujuLogUserlogin"></table> -->
+		<!-- <table tableName="yuansuju_order_change_price_record" domainObjectName="YuansujuOrderChangePriceRecord"></table> -->
+		<!-- <table tableName="yuansuju_reason_return" domainObjectName="YuansujuReasonReturn"></table> -->
+		<!-- <table tableName="yuansuju_refund_apply" domainObjectName="YuansujuRefundApply"></table> -->
+		<!-- <table tableName="yuansuju_refund_apply_progress" domainObjectName="YuansujuRefundApplyProgress"></table> -->
+		<!-- <table tableName="yuansuju_delivery_logistics" domainObjectName="YuansujuDeliveryLogistics"></table> -->
+		<!-- <table tableName="yuansuju_app_version" domainObjectName="YuansujuAppVersion"></table> -->
+		<!-- <table tableName="yuansuju_config_resource_params" domainObjectName="YuansujuConfigResourceParams"></table> -->
+		<!-- <table tableName="yuansuju_find" domainObjectName="YuansujuFind"></table> -->
+		<!-- <table tableName="yuansuju_find_product" domainObjectName="YuansujuFindProduct"></table> -->
+		<!-- <table tableName="yuansuju_install_term" domainObjectName="YuansujuInstallTerm"></table> -->
+		<!-- <table tableName="yuansuju_product_associate_install" domainObjectName="YuansujuProductAssociateInstall"></table> -->
+		<!-- <table tableName="yuansuju_sdn_product" domainObjectName="YuansujuSdnProduct"></table> -->
+		<!-- <table tableName="yuansuju_sdn_material" domainObjectName="YuansujuSdnMaterial"></table> -->
+		<!-- <table tableName="yuansuju_sku_associate_install" domainObjectName="YuansujuSkuAssociateInstall"></table> -->
+		<!-- <table tableName="yuansuju_sku_associate_install_value" domainObjectName="YuansujuSkuAssociateInstallValue"></table> -->
+		<!-- <table tableName="yuansuju_channel_business_account" domainObjectName="YuansujuChannelBusinessAccount"></table> -->
+		<!-- <table tableName="yuansuju_channel_user" domainObjectName="YuansujuChannelUser"></table> -->
+		<!-- <table tableName="yuansuju_channel_rate" domainObjectName="YuansujuChannelRate"></table> -->
+		<!-- <table tableName="yuansuju_channel_business_revenue_record" domainObjectName="YuansujuChannelBusinessRevenueRecord"></table> -->
+		<!-- <table tableName="yuansuju_channel_withdraw_rec" domainObjectName="YuansujuChannelWithdrawRec"></table> -->
+		<!-- <table tableName="yuansuju_channel_withdraw_remarks" domainObjectName="YuansujuChannelWithdrawRemarks"></table> -->
+		<!-- <table tableName="yuansuju_channel_wx_attention" domainObjectName="YuansujuChannelWxAttention"></table> -->
+		<!-- <table tableName="yuansuju_product_explosions" domainObjectName="YuansujuProductExplosions"></table> -->
+		<!-- <table tableName="yuansuju_product_explosions_pro" domainObjectName="YuansujuProductExplosionsPro"></table> -->
+		<!-- <table tableName="yuansuju_product_explosions_pro_sku" domainObjectName="YuansujuProductExplosionsProSku"></table> -->
+		<!-- <table tableName="yuansuju_es_keyword" domainObjectName="YuansujuEsKeyword"></table> -->
+		<!-- <table tableName="yuansuju_logistics_company" domainObjectName="YuansujuLogisticsCompany"></table> -->
+		<!-- <table tableName="yuansuju_home_alert_banner" domainObjectName="YuansujuHomeAlertBanner"></table> -->
+		<!-- <table tableName="yuansuju_message_user_group" domainObjectName="YuansujuMessageUserGroup"></table> -->
+		<!-- <table tableName="yuansuju_message_user_group_user" domainObjectName="YuansujuMessageUserGroupUser"></table> -->
+		<!-- <table tableName="yuansuju_msg_record" domainObjectName="YuansujuMsgRecord"></table> -->
+		<!-- <table tableName="yuansuju_msg_record_content" domainObjectName="YuansujuMsgRecordContent"></table> -->
+		<!-- <table tableName="yuansuju_msg_to" domainObjectName="YuansujuMsgTo"></table> -->
+		<!-- <table tableName="yuansuju_msg_read_record" domainObjectName="YuansujuMsgReadRecord"></table> -->
+		<!-- <table tableName="yuansuju_msg_last_read_time" domainObjectName="YuansujuMsgLastReadTime"></table> -->
+		<!-- <table tableName="yuansuju_sms_send_phone" domainObjectName="YuansujuSmsSendPhone"></table> -->
+		<!-- <table tableName="yuansuju_wx_push" domainObjectName="YuansujuWxPush"></table>  -->
+		<!-- <table tableName="yuansuju_home_mmp" domainObjectName="YuansujuHomeMmp"></table> -->
+		<!-- <table tableName="yuansuju_duan_url" domainObjectName="YuansujuDuanUrl"></table> -->
+		<!-- <table tableName="yuansuju_subject" domainObjectName="YuansujuSubject"></table> -->
+		<!-- <table tableName="yuansuju_subject_content" domainObjectName="YuansujuSubjectContent"></table> -->
+		<!-- <table tableName="yuansuju_subject_package_pack" domainObjectName="YuansujuSubjectPackagePack"></table> -->
+		<!-- <table tableName="yuansuju_subject_read_record" domainObjectName="YuansujuSubjectReadRecord"></table> -->
+		<!-- <table tableName="yuansuju_subject_pvuv" domainObjectName="YuansujuSubjectPvuv"></table> -->
+		<!-- <table tableName="yuansuju_designer" domainObjectName="YuansujuDesigner"></table> -->
+		<!-- <table tableName="yuansuju_brand_agency" domainObjectName="YuansujuBrandAgency"></table> -->
+		<!--<table tableName="yuansuju_whole_case" domainObjectName="YuansujuWholeCase"></table>-->
+		<!-- <table tableName="yuansuju_whole_case_content" domainObjectName="YuansujuWholeCaseContent"></table> -->
+		<!--<table tableName="yuansuju_whole_case_content_img" domainObjectName="YuansujuWholeCaseContentImg"></table>-->
+		<!-- <table tableName="yuansuju_whole_case_content_img_pro" domainObjectName="YuansujuWholeCaseContentImgPro"></table> -->
+		<!-- <table tableName="yuansuju_home_recommend" domainObjectName="YuansujuHomeRecommend"></table> -->
+		<!-- <table tableName="yuansuju_channel_dividend" domainObjectName="YuansujuChannelDividend"></table> -->
+		<!-- <table tableName="yuansuju_channel_dividend_product" domainObjectName="YuansujuChannelDividendProduct"></table> -->
+		<!-- <table tableName="yuansuju_caonima_japjap" domainObjectName="YuansujuCaonimaJapjap"></table> -->
+		<!-- <table tableName="yuansuju_nic_img" domainObjectName="YuansujuNicImg"></table> -->
+		<!-- <table tableName="yuansuju_product_package_pack" domainObjectName="YuansujuProductPackagePack"></table> -->
+		<!-- <table tableName="yuansuju_product_type_city" domainObjectName="YuansujuProductTypeCity"></table> -->
+		<!-- <table tableName="yuansuju_appoint_design" domainObjectName="YuansujuAppointDesign"></table> -->
+		<!-- <table tableName="yuansuju_appoint_design_push" domainObjectName="YuansujuAppointDesignPush"></table> -->
+		<table tableName="yuansuju_channel_pre_user" domainObjectName="YuansujuChannelPreUser"></table>
+		<!-- <table tableName="yuansuju_brand_type" domainObjectName="YuansujuBrandType"></table> -->
+		<!-- <table tableName="yuansuju_engineer_file" domainObjectName="YuansujuEngineerFile"></table> -->
+		<!-- <table tableName="yuansuju_engineer_deal_time" domainObjectName="YuansujuEngineerDealTime"></table> -->
+		<!-- <table tableName="yuansuju_engineer_scheme" domainObjectName="YuansujuEngineerScheme"></table> -->
+		<!-- <table tableName="yuansuju_engineer_scheme_file" domainObjectName="YuansujuEngineerSchemeFile"></table> -->
+		<!-- <table tableName="yuansuju_engineer_scheme_package_pack" domainObjectName="YuansujuEngineerSchemePackagePack"></table> -->
+		<!-- <table tableName="yuansuju_my_service" domainObjectName="YuansujuMyService"></table> -->
+		<!-- <table tableName="yuansuju_install_progress_graphic" domainObjectName="YuansujuInstallProgressGraphic"></table> -->
+		<!-- <table tableName="yuansuju_install_progress_file" domainObjectName="YuansujuInstallProgressFile"></table> -->
+		<!-- <table tableName="yuansuju_install_accepting" domainObjectName="YuansujuInstallAccepting"></table> -->
+		<!-- <table tableName="yuansuju_after_sale_apply" domainObjectName="YuansujuAfterSaleApply"></table> -->
+		<!-- <table tableName="yuansuju_after_sale_apply_file" domainObjectName="YuansujuAfterSaleApplyFile"></table> -->
+		<!-- <table tableName="yuansuju_after_sale_apply_progress" domainObjectName="YuansujuAfterSaleApplyProgress"></table> -->
+		<!-- <table tableName="yuansuju_after_sale_remarks" domainObjectName="YuansujuAfterSaleRemarks"></table> -->
+		<!-- <table tableName="yuansuju_type_warrantycard" domainObjectName="YuansujuTypeWarrantycard"></table> -->
+		<!-- <table tableName="yuansuju_type_warrantycard_item" domainObjectName="YuansujuTypeWarrantycardItem"></table> -->
+		<!-- <table tableName="yuansuju_product_warrantycard" domainObjectName="YuansujuProductWarrantycard"></table> -->
+		<!-- <table tableName="yuansuju_product_warrantycard_item" domainObjectName="YuansujuProductWarrantycardItem"></table> -->
+		<!-- <table tableName="yuansuju_order_remind_buy" domainObjectName="YuansujuOrderRemindBuy"></table> -->
+		<!-- <table tableName="yuansuju_order_remind_package_pack" domainObjectName="YuansujuOrderRemindPackagePack"></table> -->
+		<!-- <table tableName="yuansuju_banner_jump_type" domainObjectName="YuansujuBannerJumpType"></table> -->
+		<!-- <table tableName="yuansuju_banner_city" domainObjectName="YuansujuBannerCity"></table> -->
+		<!--<table tableName="yuansuju_product_city" domainObjectName="YuansujuProductCity"></table>-->
+		<!--<table tableName="admin_role_copy" domainObjectName="AdminRoleCopy"></table>-->
+	</context>
+</generatorConfiguration>

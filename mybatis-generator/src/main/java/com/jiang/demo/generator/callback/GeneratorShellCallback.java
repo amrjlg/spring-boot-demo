@@ -31,7 +31,8 @@ public class GeneratorShellCallback extends DefaultShellCallback implements Shel
         String mergedSource = newFileSource;
         if (file.exists()) {
             try {
-                JavaFileMerger fileMerger = new JavaFileMerger(newFileSource, getExistingFileContents(file, fileEncoding), javadocTags);
+                String existingFileContents = getExistingFileContents(file, fileEncoding);
+                JavaFileMerger fileMerger = new JavaFileMerger(newFileSource, existingFileContents, javadocTags);
                 mergedSource = fileMerger.getMergedSource();
             } catch (InvalidExistingFileException e) {
                 e.printStackTrace();

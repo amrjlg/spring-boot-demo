@@ -3,7 +3,8 @@
         "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <context id="default-context" defaultModelType="flat" targetRuntime="MyBatis3">
+    <context id="default-context" defaultModelType="flat" targetRuntime="MyBatis3"
+             introspectedColumnImpl="com.jiang.demo.generator.plugs.lombok.SimpleIntrospectedColumn">
         <!--是否自动为keywords添加分隔符  TRUE  添加-->
         <property name="autoDelimitKeywords" value="true"/>
 
@@ -15,8 +16,17 @@
         <property name="mapperTarget" value="src/main/java"/>
 
         <plugin type="com.jiang.demo.generator.plugs.MapperPlug"/>
+        <!--生成service层插件-->
+        <!--<plugin type="com.jiang.demo.generator.plugs.lombok.ServiceCodePlugin" >
+            <property name="targetProject" value="src\main\java"/>
+            <property name="targetPackage" value="com.yuansuju.basesystem.service"/>
+            <property name="managerRootInterface" value="com.yuansuju.basesystem.common.mybatis.manager.Manager" />
+        </plugin>-->
+
+        <!--<plugin type="com.jiang.demo.generator.plugs.lombok.SimpleGeneratorPlugin"/>-->
+
         <!--注释配置-->
-        <commentGenerator type="com.jiang.demo.generator.plugs.CommentGenerator">
+        <commentGenerator type="com.jiang.demo.generator.plugs.lombok.SimpleCommentGenerator">
             <!--是否生成注释-->
             <property name="suppressAllComments" value="false"/>
             <!--是否添加文件生成时间-->
@@ -28,25 +38,24 @@
             <property name="xmlNameSpace" value="com.jiang.demo.mapper"/>
         </commentGenerator>
 
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/world?useSSL=true">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://git.yuansuju.com:3306/yuansuju?useSSL=false">
             <property name="user" value="root"/>
-            <property name="password" value="0231625530"/>
+            <property name="password" value="Xihe123456"/>
         </jdbcConnection>
         <javaTypeResolver>
             <!--是否需要将数字映射为BigDecimal-->
-            <property name="forceBigDecimals" value="true" />
+            <property name="forceBigDecimals" value="true"/>
         </javaTypeResolver>
         <javaModelGenerator targetPackage="com.jiang.demo.model" targetProject="src/main/java">
-            <property name="trimStrings" value="true" />
+            <property name="trimStrings" value="true"/>
         </javaModelGenerator>
-        <sqlMapGenerator targetPackage="mybatis"  targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mybatis" targetProject="src/main/resources">
 
         </sqlMapGenerator>
-        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.demo.mapper"  targetProject="src/main/java">-->
-            <!--<property name="rootInterface" value="com.jiang.demo.BaseMapper"/>-->
-        <!--</javaClientGenerator>-->
-        <table tableName="city"></table>
-        <table tableName="country"></table>
-        <table tableName="countrylanguage"></table>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.demo.mapper" targetProject="src/main/java">
+            <property name="jiang-define-root-interface" value="com.jiang.demo.BaseMapper"/>
+        </javaClientGenerator>
+        <table tableName="yuansuju_ht_file" domainObjectName="YuansujuFile"/>
     </context>
 </generatorConfiguration>

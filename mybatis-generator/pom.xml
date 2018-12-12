@@ -38,13 +38,11 @@
             <scope>system</scope>
             <systemPath>F:\open source\demo\mybatis-generator\src\lib\org.mybatis.generator.eclipse.core-1.3.7.jar</systemPath>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.eclipse.jdt/core -->
-        <!--<dependency>-->
-            <!--<groupId>org.eclipse.jdt</groupId>-->
-            <!--<artifactId>core</artifactId>-->
-            <!--<version>3.1.1</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.jiang.demo</groupId>
+            <artifactId>swagger-module</artifactId>
+            <version>1.0</version>
+        </dependency>
         <dependency>
             <groupId>org.eclipse.jdt</groupId>
             <artifactId>org.eclipse.jdt.core</artifactId>

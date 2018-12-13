@@ -15,22 +15,23 @@
  */
 package com.jiang;
 
-import com.jiang.mybatis.mapper.TestMapper;
-import com.jiang.mybatis.model.TestObject;
 import org.apache.ibatis.builder.xml.XMLMapperBuilder;
 import org.apache.ibatis.datasource.unpooled.UnpooledDataSource;
 import org.apache.ibatis.logging.log4j.Log4jImpl;
 import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.session.*;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * @author Jiang
@@ -54,7 +55,7 @@ public class App {
         configuration.setMapUnderscoreToCamelCase(true);
         configuration.setUseColumnLabel(true);
         configuration.setLogImpl(Log4jImpl.class);
-        configuration.addMapper(CityMapper.class);
+//        configuration.addMapper(CityMapper.class);
         loadMapperXml("mybatis", configuration);
 //        InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("mybatis/CityMapper.xml");
 //        new XMLMapperBuilder(resourceAsStream, configuration, "mybatis/CityMapper.xml", new HashMap<>()).parse();
@@ -62,28 +63,14 @@ public class App {
         sqlSessionFactory = factoryBuilder.build(configuration);
     }
 
-    @Test
-    public void session() {
-
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-//        CityMapper mapper = sqlSession.getMapper(CityMapper.class);
-//        List<City> cities = mapper.selectByExample(null);
-//        cities.forEach(city -> System.out.println(city.getName()));
-
-        TestMapper mapper = sqlSession.getMapper(TestMapper.class);
-        List<TestObject> testObjects = mapper.selectAll();
-        testObjects.forEach(System.out::println);
-    }
-
-
     private void loadMapperXml(String mapperXmlFileLocation, Configuration configuration) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             URI uri = classLoader.getResource(mapperXmlFileLocation).toURI();
             File file = new File(uri);
-            if (file.exists() && file.isDirectory()){
+            if (file.exists() && file.isDirectory()) {
                 File[] files = file.listFiles();
-                if (null != files){
+                if (null != files) {
                     for (File xml : files) {
                         String source = mapperXmlFileLocation + "/" + xml.getName();
                         new XMLMapperBuilder(classLoader.getResourceAsStream(source), configuration, source, new HashMap<>()).parse();
@@ -93,15 +80,5 @@ public class App {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-
-
-    }
-
-    @Test
-    public void file() throws URISyntaxException {
-        URI uri = getClass().getClassLoader().getResource("mybatis").toURI();
-        File file = new File(uri);
-
-
     }
 }

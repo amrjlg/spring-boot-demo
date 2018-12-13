@@ -18,12 +18,5 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @MapperScan(basePackages = "com.jiang.demo.mapper")
 public class BootApplicationTest {
-    @Autowired
-    private CityMapper cityMapper;
 
-    @Test
-    public void test(){
-        List<City> cities = cityMapper.selectByExample(null);
-        cities.forEach(city -> System.out.println(city.getName()));
-    }
 }

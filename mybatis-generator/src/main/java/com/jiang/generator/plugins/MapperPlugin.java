@@ -25,9 +25,6 @@ public class MapperPlugin extends PluginAdapter {
 
     /**
      * 插件是否启用
-     *
-     * @param warnings
-     * @return
      */
     @Override
     public boolean validate(List<String> warnings) {
@@ -38,9 +35,7 @@ public class MapperPlugin extends PluginAdapter {
      * mapper生成
      *
      * @param interfaze         mapper类信息
-     * @param topLevelClass
      * @param introspectedTable 表信息
-     * @return
      */
     @Override
     public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
@@ -57,7 +52,6 @@ public class MapperPlugin extends PluginAdapter {
      *
      * @param topLevelClass     model类信息
      * @param introspectedTable 表信息
-     * @return
      */
     @Override
     public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
@@ -68,7 +62,7 @@ public class MapperPlugin extends PluginAdapter {
         }
         if (null != lombokData){
             topLevelClass.addImportedType(lombokData.getName());
-            topLevelClass.addAnnotation("@Data");
+            topLevelClass.addAnnotation(ImportType.SWAGGER_API_MODEL_PROPERTY.getAnnotation());
             topLevelClass.getMethods().clear();
         }
         return true;
@@ -79,7 +73,6 @@ public class MapperPlugin extends PluginAdapter {
      *
      * @param topLevelClass     example类信息
      * @param introspectedTable 表信息
-     * @return
      */
     @Override
     public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {

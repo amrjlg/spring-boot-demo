@@ -1,13 +1,13 @@
 package com.jiang.generator.plugins;
 
 import com.jiang.generator.enums.Config;
+import com.jiang.generator.enums.ImportType;
 import com.jiang.generator.utils.ClassUtil;
+import com.jiang.generator.utils.StringUtils;
 import org.mybatis.generator.api.*;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.internal.ObjectFactory;
+import org.mybatis.generator.internal.util.StringUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +32,7 @@ public class ServicePlugin extends PluginAdapter {
         serviceProject = properties.getProperty(Config.SERVICE_PROJECT.getProperty(), "src/main/java");
         serviceRoot = properties.getProperty(Config.CLIENT_ROOT_INTERFACE.getProperty(), "com.jiang.web.service.BaseService");
         defaultServiceImpl = properties.getProperty(Config.SERVICE_IMPL.getProperty(), "com.jiang.web.service.DefaultService");
+
     }
 
     @Override
@@ -53,7 +54,7 @@ public class ServicePlugin extends PluginAdapter {
         return services;
     }
 
-    private void generateServiceInterFace(IntrospectedTable introspectedTable, List<GeneratedJavaFile> services, JavaFormatter javaFormatter) {
+    private void generateServiceInterFace(IntrospectedTable introspectedTable, List<GeneratedJavaFile> files, JavaFormatter javaFormatter) {
         IntrospectedColumn column = introspectedTable.getPrimaryKeyColumns().get(0);
         FullyQualifiedJavaType keyFullType = column.getFullyQualifiedJavaType();
         String keyFullTypeShortName = keyFullType.getShortName();
@@ -78,10 +79,10 @@ public class ServicePlugin extends PluginAdapter {
             serviceInterface.setVisibility(JavaVisibility.PUBLIC);
             serviceInterface.addImportedTypes(types);
             serviceInterface.addSuperInterface(new FullyQualifiedJavaType(baseService));
-            serviceInterface.addAnnotation("@Service");
-            serviceInterface.addImportedType(new FullyQualifiedJavaType("org.springframework.stereotype.Service"));
+            serviceInterface.addAnnotation(ImportType.SPRING_SERVICE.getAnnotation());
+            serviceInterface.addImportedType(new FullyQualifiedJavaType(ImportType.SPRING_SERVICE.getType()));
             //添加service到额外生成的文件集合
-            services.add(new GeneratedJavaFile(serviceInterface, this.serviceProject, javaFormatter));
+            files.add(new GeneratedJavaFile(serviceInterface, this.serviceProject, javaFormatter));
         }
         if (serviceClassImpl == null) {
             //service实现类
@@ -93,7 +94,9 @@ public class ServicePlugin extends PluginAdapter {
             //添加父类
             topLevelClass.setSuperClass(defaultServiceImpl);
             topLevelClass.addSuperInterface(new FullyQualifiedJavaType(model + "Service"));
-            services.add(new GeneratedJavaFile(topLevelClass, this.serviceProject, javaFormatter));
+            files.add(new GeneratedJavaFile(topLevelClass, this.serviceProject, javaFormatter));
         }
     }
+
+
 }

@@ -9,7 +9,11 @@ public enum Config {
     SERVICE_IMPL("service-impl"),
     SERVICE_PROJECT("service-project"),
     SERVICE_PACKAGE("service-package"),
-    CLIENT_ROOT_INTERFACE("jiang-define-root-interface");
+    CLIENT_ROOT_INTERFACE("jiang-define-root-interface"),
+    CONTROLLER_PACKAGE("controller-package"),
+    CONTROLLER_PROJECT("controller-project"),
+    CONTROLLER("controller"),
+    REST_CONTROLLER("rest-controller");
 
     public String getProperty() {
         return property;

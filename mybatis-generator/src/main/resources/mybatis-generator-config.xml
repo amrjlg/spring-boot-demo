@@ -13,10 +13,16 @@
         <property name="endingDelimiter" value="`"/>
         <!--生成service层插件-->
         <plugin type="com.jiang.generator.plugins.ServicePlugin">
-            <property name="jiang-define-root-interface" value="com.jiang.web.service.BaseService" />
-            <property name="service-package" value="com.jiang.web.service"/>
             <property name="service-project" value="src\main\java"/>
+            <property name="service-package" value="com.jiang.web.service"/>
+            <property name="jiang-define-root-interface" value="com.jiang.web.service.BaseService" />
             <property name="service-impl" value="com.jiang.web.service.DefaultService"/>
+        </plugin>
+        <plugin type="com.jiang.generator.plugins.ControllerPlugin">
+            <property name="controller-project" value="src\main\java"/>
+            <property name="controller-package" value="com.jiang.web.controller"/>
+            <property name="rest-controller" value="true"/>
+            <property name="controller" value="true"/>
         </plugin>
         <!--mapper插件-->
         <plugin type="com.jiang.generator.plugins.MapperPlugin"/>
@@ -51,6 +57,5 @@
             <property name="jiang-define-root-interface" value="com.jiang.mybatis.mapper.BaseMapper"/>
         </javaClientGenerator>
         <table tableName="yuansuju_ht_file" domainObjectName="YuansujuFile"/>
-        <!--<table tableName="test" domainObjectName="Test"/>-->
     </context>
 </generatorConfiguration>

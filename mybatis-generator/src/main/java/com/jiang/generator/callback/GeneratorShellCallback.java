@@ -1,8 +1,6 @@
 package com.jiang.generator.callback;
 
 import org.mybatis.generator.api.ShellCallback;
-import org.mybatis.generator.eclipse.core.merge.InvalidExistingFileException;
-import org.mybatis.generator.eclipse.core.merge.JavaFileMerger;
 import org.mybatis.generator.exception.ShellException;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
@@ -25,17 +23,17 @@ public class GeneratorShellCallback extends DefaultShellCallback implements Shel
     }
 
     @Override
-    public String mergeJavaFile(String newFileSource, File file, String[] javadocTags, String fileEncoding) throws ShellException {
+    public String mergeJavaFile(String newFileSource, File file, String[] javadocTags, String fileEncoding) {
         String mergedSource = newFileSource;
-        if (file.exists()) {
-            try {
-                String existingFileContents = getExistingFileContents(file, fileEncoding);
-                JavaFileMerger fileMerger = new JavaFileMerger(newFileSource, existingFileContents, javadocTags);
-                mergedSource = fileMerger.getMergedSource();
-            } catch (InvalidExistingFileException e) {
-                e.printStackTrace();
-            }
-        }
+//        if (file.exists()) {
+//            try {
+//                String existingFileContents = getExistingFileContents(file, fileEncoding);
+//                JavaFileMerger fileMerger = new JavaFileMerger(newFileSource, existingFileContents, javadocTags);
+//                mergedSource = fileMerger.getMergedSource();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
         return mergedSource;
     }
 
@@ -61,7 +59,7 @@ public class GeneratorShellCallback extends DefaultShellCallback implements Shel
             }
             br.close();
         } catch (IOException e) {
-            throw new ShellException(String.format("read file %s error!",existingFile.getAbsoluteFile()));
+            throw new ShellException(String.format("read file %s error!", existingFile.getAbsoluteFile()));
         }
         return sb.toString();
     }

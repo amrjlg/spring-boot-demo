@@ -12,18 +12,11 @@
     <artifactId>mybatis-generator</artifactId>
 
     <dependencies>
-
-        <dependency>
-            <groupId>com.jiang.demo</groupId>
-            <artifactId>swagger-module</artifactId>
-            <version>1.0</version>
-        </dependency>
         <dependency>
             <groupId>com.jiang.demo</groupId>
             <artifactId>mybatis</artifactId>
             <version>1.0</version>
         </dependency>
-
         <dependency>
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-core</artifactId>
@@ -34,12 +27,26 @@
             <artifactId>eclipse.core</artifactId>
             <version>1.3.7</version>
             <scope>system</scope>
-            <systemPath>F:\open source\demo\mybatis-generator\src\lib\org.mybatis.generator.eclipse.core-1.3.7.jar</systemPath>
+            <systemPath>F:\open source\demo\mybatis-generator\src\lib\org.mybatis.generator.eclipse.core-1.3.7.jar
+            </systemPath>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jdt</groupId>
             <artifactId>org.eclipse.jdt.core</artifactId>
             <version>3.15.0</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
     </dependencies>
 

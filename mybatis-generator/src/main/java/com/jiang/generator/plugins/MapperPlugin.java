@@ -1,6 +1,8 @@
 package com.jiang.generator.plugins;
 
 import com.jiang.generator.enums.Config;
+import com.jiang.generator.enums.ImportType;
+import com.jiang.generator.utils.ClassUtil;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
@@ -59,16 +61,15 @@ public class MapperPlugin extends PluginAdapter {
      */
     @Override
     public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-        try {
-            Class.forName("io.swagger.annotations.ApiModelProperty");
-            topLevelClass.addImportedType("io.swagger.annotations.ApiModelProperty");
-
-            Class.forName("lombok.Data");
-            topLevelClass.addImportedType("lombok.Data");
+        Class apiModelProperty = ClassUtil.getClassForName(ImportType.SWAGGER_API_MODEL_PROPERTY.getType());
+        Class lombokData = ClassUtil.getClassForName(ImportType.LOMBOK_DATA.getType());
+        if (null != apiModelProperty){
+            topLevelClass.addImportedType(apiModelProperty.getTypeName());
+        }
+        if (null != lombokData){
+            topLevelClass.addImportedType(lombokData.getName());
             topLevelClass.addAnnotation("@Data");
             topLevelClass.getMethods().clear();
-        } catch (ClassNotFoundException ignored) {
-
         }
         return true;
     }

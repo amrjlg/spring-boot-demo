@@ -11,9 +11,6 @@
         <!--分隔符-->
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
-        <property name="baseMapper" value="com.jiang.mybatis.mapper.BaseMapper"/>
-        <property name="mapperPackage" value="com.jiang.demo.mapper"/>
-        <property name="mapperTarget" value="src/main/java"/>
         <!--生成service层插件-->
         <plugin type="com.jiang.generator.plugins.ServicePlugin">
             <property name="jiang-define-root-interface" value="com.jiang.web.service.BaseService" />
@@ -50,9 +47,10 @@
         <sqlMapGenerator targetPackage="mybatis" targetProject="src/main/resources">
 
         </sqlMapGenerator>
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.dao.mapper" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.dao.mapper" targetProject="demo/src/main/java">
             <property name="jiang-define-root-interface" value="com.jiang.mybatis.mapper.BaseMapper"/>
         </javaClientGenerator>
         <table tableName="yuansuju_ht_file" domainObjectName="YuansujuFile"/>
+        <!--<table tableName="test" domainObjectName="Test"/>-->
     </context>
 </generatorConfiguration>

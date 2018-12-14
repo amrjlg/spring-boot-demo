@@ -1,6 +1,5 @@
 package com.jiang.generator.callback;
 
-import org.apache.ibatis.io.Resources;
 import org.mybatis.generator.api.ShellCallback;
 import org.mybatis.generator.eclipse.core.merge.InvalidExistingFileException;
 import org.mybatis.generator.eclipse.core.merge.JavaFileMerger;
@@ -8,7 +7,6 @@ import org.mybatis.generator.exception.ShellException;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
 import java.io.*;
-import java.util.Arrays;
 
 /**
  * @author Jiang

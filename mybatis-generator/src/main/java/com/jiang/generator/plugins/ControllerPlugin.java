@@ -2,6 +2,7 @@ package com.jiang.generator.plugins;
 
 import com.jiang.generator.enums.Config;
 import com.jiang.generator.enums.ImportType;
+import com.jiang.generator.utils.ClassUtil;
 import com.jiang.generator.utils.StringUtils;
 import org.mybatis.generator.api.GeneratedJavaFile;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -58,8 +59,12 @@ public class ControllerPlugin extends PluginAdapter {
     private void generatorController(String modelName, String serviceFullName, List<GeneratedJavaFile> files, JavaFormatter javaFormatter) {
         if (StringUtility.stringHasValue(controllerPackage)) {
             String serviceFeild = StringUtils.lowerFirst(modelName + "Service");
-            if (restController) {
-                TopLevelClass resetControllerClass = new TopLevelClass(controllerPackage + ".json." + modelName + "Controller");
+            String restContoller = controllerPackage + ".json." + modelName + "Controller";
+            String controller = controllerPackage + ".page." + modelName + "Controller";
+            Class restControllerClass = ClassUtil.getClassForName(restContoller);
+            Class controllerClass = ClassUtil.getClassForName(controller);
+            if (restController && restControllerClass==null) {
+                TopLevelClass resetControllerClass = new TopLevelClass(restContoller);
                 resetControllerClass.setVisibility(JavaVisibility.PUBLIC);
                 resetControllerClass.addImportedType(serviceFullName);
                 resetControllerClass.addImportedType(ImportType.SPRING_REST_CONTROLLER.getType());
@@ -71,8 +76,8 @@ public class ControllerPlugin extends PluginAdapter {
                 GeneratedJavaFile restController = new GeneratedJavaFile(resetControllerClass, controllerProject, javaFormatter);
                 files.add(restController);
             }
-            if (controller){
-                TopLevelClass resetControllerClass = new TopLevelClass(controllerPackage + ".page." + modelName + "Controller");
+            if (this.controller && controllerClass == null) {
+                TopLevelClass resetControllerClass = new TopLevelClass(controller);
                 resetControllerClass.setVisibility(JavaVisibility.PUBLIC);
                 resetControllerClass.addImportedType(serviceFullName);
                 resetControllerClass.addImportedType(ImportType.SPRING_CONTROLLER.getType());

@@ -79,8 +79,7 @@ public class ServicePlugin extends PluginAdapter {
             serviceInterface.setVisibility(JavaVisibility.PUBLIC);
             serviceInterface.addImportedTypes(types);
             serviceInterface.addSuperInterface(new FullyQualifiedJavaType(baseService));
-            serviceInterface.addAnnotation(ImportType.SPRING_SERVICE.getAnnotation());
-            serviceInterface.addImportedType(new FullyQualifiedJavaType(ImportType.SPRING_SERVICE.getType()));
+
             //添加service到额外生成的文件集合
             files.add(new GeneratedJavaFile(serviceInterface, this.serviceProject, javaFormatter));
         }
@@ -94,6 +93,8 @@ public class ServicePlugin extends PluginAdapter {
             //添加父类
             topLevelClass.setSuperClass(defaultServiceImpl);
             topLevelClass.addSuperInterface(new FullyQualifiedJavaType(model + "Service"));
+            topLevelClass.addAnnotation(ImportType.SPRING_SERVICE.getAnnotation());
+            topLevelClass.addImportedType(new FullyQualifiedJavaType(ImportType.SPRING_SERVICE.getType()));
             files.add(new GeneratedJavaFile(topLevelClass, this.serviceProject, javaFormatter));
         }
     }

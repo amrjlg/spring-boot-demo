@@ -13,7 +13,9 @@ import org.mybatis.generator.config.JavaClientGeneratorConfiguration;
 import org.mybatis.generator.config.JavaModelGeneratorConfiguration;
 import org.mybatis.generator.internal.util.StringUtility;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -58,11 +60,11 @@ public class MapperPlugin extends PluginAdapter {
         Class apiModelProperty = ClassUtil.getClassForName(ImportType.SWAGGER_API_MODEL_PROPERTY.getType());
         Class lombokData = ClassUtil.getClassForName(ImportType.LOMBOK_DATA.getType());
         if (null != apiModelProperty){
-            topLevelClass.addImportedType(apiModelProperty.getTypeName());
+            topLevelClass.addImportedType(ImportType.SWAGGER_API_MODEL_PROPERTY.getType());
         }
         if (null != lombokData){
-            topLevelClass.addImportedType(lombokData.getName());
-            topLevelClass.addAnnotation(ImportType.SWAGGER_API_MODEL_PROPERTY.getAnnotation());
+            topLevelClass.addImportedType(ImportType.LOMBOK_DATA.getType());
+            topLevelClass.addAnnotation(ImportType.LOMBOK_DATA.getAnnotation());
             topLevelClass.getMethods().clear();
         }
         return true;
@@ -79,7 +81,7 @@ public class MapperPlugin extends PluginAdapter {
         return true;
     }
 
-    private void initMapper(Interface mapper, IntrospectedTable introspectedTable, String baseMapper) {
+    private synchronized void  initMapper(Interface mapper, IntrospectedTable introspectedTable, String baseMapper) {
         JavaModelGeneratorConfiguration configuration = context.getJavaModelGeneratorConfiguration();
         String modelName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
         List<IntrospectedColumn> primaryKeyColumns = introspectedTable.getPrimaryKeyColumns();
@@ -88,7 +90,7 @@ public class MapperPlugin extends PluginAdapter {
         String primaryKeyTypeName = javaType.getShortName();
         String modelPackage = configuration.getTargetPackage();
         //清空原有包
-        mapper.getImportedTypes().clear();
+        //mapper.getImportedTypes().clear();
         //清空mapper原有方法
         mapper.getMethods().clear();
         //主键

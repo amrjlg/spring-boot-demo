@@ -10,6 +10,16 @@ public enum ImportType {
     SPRING_CONTROLLER("org.springframework.stereotype.Controller","@Controller"),
     SPRING_REST_CONTROLLER("org.springframework.web.bind.annotation.RestController","@RestController"),
     SPRING_AUTOWIRED("org.springframework.beans.factory.annotation.Autowired","@Autowired"),
+    SPRING_REQUEST_MAPPING("org.springframework.web.bind.annotation.RequestMapping","@RequestMapping"),
+    SPRING_POST_MAPPING("org.springframework.web.bind.annotation.GetMapping","@GetMapping"),
+    SPRING_GET_MAPPING("org.springframework.web.bind.annotation.PostMapping","@PostMapping"),
+    SPRING_PATH_VARIABLE("org.springframework.web.bind.annotation.PathVariable","@PathVariable"),
+    SPRING_REQUEST_PARAM("org.springframework.web.bind.annotation.RequestParam","@RequestParam"),
+
+
+
+
+
     LOMBOK_DATA("lombok.Data","@Data"),
     SWAGGER_API_MODEL_PROPERTY("io.swagger.annotations.ApiModelProperty","@ApiModelProperty")
     ;

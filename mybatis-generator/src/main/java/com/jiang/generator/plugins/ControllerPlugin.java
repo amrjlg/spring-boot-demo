@@ -8,10 +8,7 @@ import org.mybatis.generator.api.GeneratedJavaFile;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.JavaFormatter;
 import org.mybatis.generator.api.PluginAdapter;
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.internal.ObjectFactory;
 import org.mybatis.generator.internal.util.StringUtility;
 
@@ -59,10 +56,11 @@ public class ControllerPlugin extends PluginAdapter {
     private void generatorController(String modelName, String serviceFullName, List<GeneratedJavaFile> files, JavaFormatter javaFormatter) {
         if (StringUtility.stringHasValue(controllerPackage)) {
             String serviceFeild = StringUtils.lowerFirst(modelName + "Service");
-            String restContoller = controllerPackage + ".json." + modelName + "Controller";
-            String controller = controllerPackage + ".page." + modelName + "Controller";
+            String restContoller = controllerPackage + ".json." + modelName + "JsonController";
+            String controller = controllerPackage + ".page." + modelName + "PageController";
             Class restControllerClass = ClassUtil.getClassForName(restContoller);
             Class controllerClass = ClassUtil.getClassForName(controller);
+
             if (restController && restControllerClass==null) {
                 TopLevelClass resetControllerClass = new TopLevelClass(restContoller);
                 resetControllerClass.setVisibility(JavaVisibility.PUBLIC);
@@ -70,26 +68,28 @@ public class ControllerPlugin extends PluginAdapter {
                 resetControllerClass.addImportedType(ImportType.SPRING_REST_CONTROLLER.getType());
                 resetControllerClass.addImportedType(ImportType.SPRING_AUTOWIRED.getType());
                 resetControllerClass.addAnnotation(ImportType.SPRING_REST_CONTROLLER.getAnnotation());
-                Field service = new Field(serviceFeild, new FullyQualifiedJavaType(serviceFullName));
-                service.addAnnotation(ImportType.SPRING_AUTOWIRED.getAnnotation());
-                resetControllerClass.addField(service);
+                addServiceField(resetControllerClass,serviceFeild,serviceFullName);
                 GeneratedJavaFile restController = new GeneratedJavaFile(resetControllerClass, controllerProject, javaFormatter);
                 files.add(restController);
             }
             if (this.controller && controllerClass == null) {
-                TopLevelClass resetControllerClass = new TopLevelClass(controller);
-                resetControllerClass.setVisibility(JavaVisibility.PUBLIC);
-                resetControllerClass.addImportedType(serviceFullName);
-                resetControllerClass.addImportedType(ImportType.SPRING_CONTROLLER.getType());
-                resetControllerClass.addImportedType(ImportType.SPRING_AUTOWIRED.getType());
-                resetControllerClass.addAnnotation(ImportType.SPRING_CONTROLLER.getAnnotation());
-                Field service = new Field(serviceFeild, new FullyQualifiedJavaType(serviceFullName));
-                service.addAnnotation(ImportType.SPRING_AUTOWIRED.getAnnotation());
-                resetControllerClass.addField(service);
-                GeneratedJavaFile restController = new GeneratedJavaFile(resetControllerClass, controllerProject, javaFormatter);
+                TopLevelClass pageControllerClass = new TopLevelClass(controller);
+                pageControllerClass.setVisibility(JavaVisibility.PUBLIC);
+                pageControllerClass.addImportedType(serviceFullName);
+                pageControllerClass.addImportedType(ImportType.SPRING_CONTROLLER.getType());
+                pageControllerClass.addImportedType(ImportType.SPRING_AUTOWIRED.getType());
+                pageControllerClass.addAnnotation(ImportType.SPRING_CONTROLLER.getAnnotation());
+                addServiceField(pageControllerClass,serviceFeild,serviceFullName);
+
+                GeneratedJavaFile restController = new GeneratedJavaFile(pageControllerClass, controllerProject, javaFormatter);
                 files.add(restController);
             }
         }
     }
-
+    private void addServiceField(TopLevelClass controller,String fieldName ,String serviceFullName){
+        Field service = new Field(fieldName, new FullyQualifiedJavaType(serviceFullName));
+        service.addAnnotation(ImportType.SPRING_AUTOWIRED.getAnnotation());
+        service.setVisibility(JavaVisibility.PRIVATE);
+        controller.addField(service);
+    }
 }

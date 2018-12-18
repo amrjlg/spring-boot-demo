@@ -1,9 +1,11 @@
 package com.jiang;
 
+import com.jiang.generator.callback.GeneratorShellCallback;
 import org.junit.Test;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
+import org.mybatis.generator.eclipse.core.callback.EclipseShellCallback;
 import org.mybatis.generator.internal.DefaultShellCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

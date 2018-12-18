@@ -1,6 +1,7 @@
 package com.jiang.generator.callback;
 
 import org.mybatis.generator.api.ShellCallback;
+import org.mybatis.generator.eclipse.core.merge.JavaFileMerger;
 import org.mybatis.generator.exception.ShellException;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
@@ -23,18 +24,10 @@ public class GeneratorShellCallback extends DefaultShellCallback implements Shel
     }
 
     @Override
-    public String mergeJavaFile(String newFileSource, File file, String[] javadocTags, String fileEncoding) {
-        String mergedSource = newFileSource;
-//        if (file.exists()) {
-//            try {
-//                String existingFileContents = getExistingFileContents(file, fileEncoding);
-//                JavaFileMerger fileMerger = new JavaFileMerger(newFileSource, existingFileContents, javadocTags);
-//                mergedSource = fileMerger.getMergedSource();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-        return mergedSource;
+    public String mergeJavaFile(String newFileSource, String existingFileFullPath, String[] javadocTags, String fileEncoding) throws ShellException {
+        JavaFileMerger fileMerger = new JavaFileMerger(newFileSource, existingFileFullPath, javadocTags, fileEncoding);
+
+        return fileMerger.getMergedSource();
     }
 
     @Override

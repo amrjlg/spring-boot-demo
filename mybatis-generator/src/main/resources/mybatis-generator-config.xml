@@ -53,7 +53,7 @@
         <sqlMapGenerator targetPackage="mybatis" targetProject="src/main/resources">
 
         </sqlMapGenerator>
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.dao.mapper" targetProject="demo/src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.dao.mapper" targetProject="src/main/java">
             <property name="jiang-define-root-interface" value="com.jiang.mybatis.mapper.BaseMapper"/>
         </javaClientGenerator>
         <table tableName="yuansuju_ht_file" domainObjectName="YuansujuFile"/>

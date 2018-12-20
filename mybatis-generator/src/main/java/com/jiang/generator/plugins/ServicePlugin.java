@@ -23,7 +23,8 @@ public class ServicePlugin extends PluginAdapter {
     private String serviceProject;
     private String serviceRoot;
     private String defaultServiceImpl;
-
+    private String serviceName;
+    private String superServiceName;
     private final Logger logger = LoggerFactory.getLogger(ServicePlugin.class);
     @Override
     public void setProperties(Properties properties) {
@@ -31,8 +32,11 @@ public class ServicePlugin extends PluginAdapter {
         servicePackage = properties.getProperty(Config.SERVICE_PACKAGE.getProperty(), "com.jiang.web.service");
         serviceProject = properties.getProperty(Config.SERVICE_PROJECT.getProperty(), "src/main/java");
         serviceRoot = properties.getProperty(Config.CLIENT_ROOT_INTERFACE.getProperty(), "com.jiang.web.service.BaseService");
+        String[] split = serviceRoot.split("\\.");
+        superServiceName = split[split.length-1];
         defaultServiceImpl = properties.getProperty(Config.SERVICE_IMPL.getProperty(), "com.jiang.web.service.DefaultService");
-
+        String[] name = this.defaultServiceImpl.split("\\.");
+        serviceName = name[name.length-1];
     }
 
     @Override
@@ -62,8 +66,8 @@ public class ServicePlugin extends PluginAdapter {
         String modelPackage = this.context.getJavaModelGeneratorConfiguration().getTargetPackage();
         String service = this.servicePackage + "." + model + "Service";
         String serviceImpl = this.servicePackage + ".impl." + model + "ServiceImpl";
-        String baseService = String.format("%s<%s,%s,%sExample>", serviceRoot, model, keyFullTypeShortName, model);
-        String defaultServiceImpl = String.format("%s<%s,%s,%sExample>", this.defaultServiceImpl, model, keyFullTypeShortName, model);
+        String baseService = String.format("%s<%s,%sExample>", superServiceName, model,  model);
+        String defaultServiceImpl = String.format("%s<%s,%sExample>", serviceName, model, model);
         Class serviceClass = ClassUtil.getClassForName(service);
         Class serviceClassImpl = ClassUtil.getClassForName(serviceImpl);
         //service 、service imp 公共导包set
@@ -78,6 +82,7 @@ public class ServicePlugin extends PluginAdapter {
             Interface serviceInterface = new Interface(service);
             serviceInterface.setVisibility(JavaVisibility.PUBLIC);
             serviceInterface.addImportedTypes(types);
+            serviceInterface.addImportedType(new FullyQualifiedJavaType(serviceRoot));
             serviceInterface.addSuperInterface(new FullyQualifiedJavaType(baseService));
 
             //添加service到额外生成的文件集合
@@ -90,6 +95,7 @@ public class ServicePlugin extends PluginAdapter {
             topLevelClass.addImportedTypes(types);
             //引入service
             topLevelClass.addImportedType(new FullyQualifiedJavaType(service));
+            topLevelClass.addImportedType(new FullyQualifiedJavaType(this.defaultServiceImpl));
             //添加父类
             topLevelClass.setSuperClass(defaultServiceImpl);
             topLevelClass.addSuperInterface(new FullyQualifiedJavaType(model + "Service"));

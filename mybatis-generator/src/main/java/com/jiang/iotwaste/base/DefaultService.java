@@ -1,6 +1,7 @@
-package com.jiang.web.service;
+package com.jiang.iotwaste.base;
 
-import com.jiang.mybatis.mapper.BaseMapper;
+
+import com.jiang.iotwaste.base.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

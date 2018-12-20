@@ -27,6 +27,8 @@ public class ControllerPlugin extends PluginAdapter {
     private boolean restController;
     private boolean controller;
     private String servicePackage;
+    private String baseController;
+    private String modelPackage;
 
     @Override
     public boolean validate(List<String> warnings) {
@@ -41,6 +43,8 @@ public class ControllerPlugin extends PluginAdapter {
         controller = StringUtility.stringHasValue(properties.getProperty(Config.CONTROLLER.getProperty()));
         controllerProject = properties.getProperty(Config.CONTROLLER_PROJECT.getProperty());
         servicePackage = properties.getProperty(Config.SERVICE_PACKAGE.getProperty(), "com.jiang.web.service");
+        baseController =  properties.getProperty(Config.CLIENT_ROOT_INTERFACE.getProperty());
+        modelPackage  = context.getJavaModelGeneratorConfiguration().getTargetPackage();
     }
 
     @Override
@@ -62,10 +66,15 @@ public class ControllerPlugin extends PluginAdapter {
             Class controllerClass = ClassUtil.getClassForName(controller);
 
             if (restController && restControllerClass==null) {
+
                 TopLevelClass resetControllerClass = new TopLevelClass(restContoller);
                 resetControllerClass.setVisibility(JavaVisibility.PUBLIC);
                 resetControllerClass.addImportedType(serviceFullName);
                 resetControllerClass.addImportedType(ImportType.SPRING_REST_CONTROLLER.getType());
+                resetControllerClass.addImportedType(baseController);
+                resetControllerClass.addImportedType(modelPackage+"."+modelName);
+                resetControllerClass.addImportedType(modelPackage+"."+modelName+"Example");
+                resetControllerClass.setSuperClass("BaseController<"+modelName+"Service,"+modelName+","+modelName+"Example>");
                 resetControllerClass.addImportedType(ImportType.SPRING_AUTOWIRED.getType());
                 resetControllerClass.addAnnotation(ImportType.SPRING_REST_CONTROLLER.getAnnotation());
                 addServiceField(resetControllerClass,serviceFeild,serviceFullName);

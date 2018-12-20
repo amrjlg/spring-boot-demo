@@ -84,17 +84,11 @@ public class MapperPlugin extends PluginAdapter {
     private synchronized void  initMapper(Interface mapper, IntrospectedTable introspectedTable, String baseMapper) {
         JavaModelGeneratorConfiguration configuration = context.getJavaModelGeneratorConfiguration();
         String modelName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
-        List<IntrospectedColumn> primaryKeyColumns = introspectedTable.getPrimaryKeyColumns();
-        IntrospectedColumn column = primaryKeyColumns.get(0);
-        FullyQualifiedJavaType javaType = column.getFullyQualifiedJavaType();
-        String primaryKeyTypeName = javaType.getShortName();
         String modelPackage = configuration.getTargetPackage();
         //清空原有包
         //mapper.getImportedTypes().clear();
         //清空mapper原有方法
         mapper.getMethods().clear();
-        //主键
-        mapper.addImportedType(javaType);
         //Model
         mapper.addImportedType(new FullyQualifiedJavaType(modelPackage + "." + modelName));
         //Example
@@ -102,6 +96,6 @@ public class MapperPlugin extends PluginAdapter {
         //导入Mapper父类
         mapper.addImportedType(new FullyQualifiedJavaType(baseMapper));
         //添加继承
-        mapper.addSuperInterface(new FullyQualifiedJavaType(String.format("BaseMapper<%s,%s,%sExample>", modelName, primaryKeyTypeName, modelName)));
+        mapper.addSuperInterface(new FullyQualifiedJavaType(String.format("BaseMapper<%s,%sExample>", modelName, modelName)));
     }
 }

@@ -1,15 +1,13 @@
-package com.jiang.mybatis.mapper;
-
-import org.apache.ibatis.annotations.Param;
+package com.jiang.iotwaste.base;
 
 import java.util.List;
 
 /**
- * @author Jiang
- * @date 2018/12/6
- * @time 14:17
- */
-public interface BaseMapper<Type, Example> {
+ * @author jiang
+ * @date 2018/12/13
+ * @time 14:41
+ **/
+public interface BaseService<Type,Example> {
     long countByExample(Example example);
 
     int deleteByExample(Example example);
@@ -24,9 +22,9 @@ public interface BaseMapper<Type, Example> {
 
     Type selectByPrimaryKey(Object id);
 
-    int updateByExampleSelective(@Param("record") Type record, @Param("example") Example example);
+    int updateByExampleSelective(Type record, Example example);
 
-    int updateByExample(@Param("record") Type record, @Param("example") Example example);
+    int updateByExample(Type record, Example example);
 
     int updateByPrimaryKeySelective(Type record);
 

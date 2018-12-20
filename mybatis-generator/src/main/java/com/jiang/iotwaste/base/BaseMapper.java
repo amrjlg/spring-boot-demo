@@ -1,4 +1,4 @@
-package com.jiang.mybatis.mapper;
+package com.jiang.iotwaste.base;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @date 2018/12/6
  * @time 14:17
  */
-public interface BaseMapper<Type, Example> {
+public interface BaseMapper<Type,  Example> {
     long countByExample(Example example);
 
     int deleteByExample(Example example);

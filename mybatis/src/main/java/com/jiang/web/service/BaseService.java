@@ -7,12 +7,12 @@ import java.util.List;
  * @date 2018/12/13
  * @time 14:41
  **/
-public interface BaseService<Type,Key,Example> {
+public interface BaseService<Type,Example> {
     long countByExample(Example example);
 
     int deleteByExample(Example example);
 
-    int deleteByPrimaryKey(Key id);
+    int deleteByPrimaryKey(Object id);
 
     int insert(Type record);
 
@@ -20,7 +20,7 @@ public interface BaseService<Type,Key,Example> {
 
     List<Type> selectByExample(Example example);
 
-    Type selectByPrimaryKey(Key id);
+    Type selectByPrimaryKey(Object id);
 
     int updateByExampleSelective(Type record,  Example example);
 

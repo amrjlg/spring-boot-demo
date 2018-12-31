@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiang.iotwaste.web.mapper.ClassificationMapper">
+    <resultMap id="Classification" type="com.jiang.iotwaste.web.model.Classification">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="children" ofType="com.jiang.iotwaste.web.model.ClassificationChildren" column="parentId">
+            <id property="childId" column="childId"/>
+            <result property="parentId" column="parentId"/>
+            <result property="childName" column="childName"/>
+            <result property="display" column="display"/>
+        </collection>
+    </resultMap>
+
+    <select id="classificationsByParentId" resultMap="Classification">
+        SELECT
+            l.pid as `id`,
+            r.`name`,
+            r.classifyId as parentId,
+            l.classifyId as childId,
+            l.`name` AS childName,
+            l.display
+        FROM
+            t_classification l
+                LEFT JOIN t_classification r ON l.pid = r.classifyId
+        WHERE
+            l.pid LIKE CONCAT(#{pid},'%')
+        ORDER BY
+            l.pid,
+            l.display
+    </select>
+</mapper>

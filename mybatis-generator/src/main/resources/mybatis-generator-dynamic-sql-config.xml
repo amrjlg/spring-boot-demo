@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="default-context" defaultModelType="flat" targetRuntime="MyBatis3DynamicSQL"
+             introspectedColumnImpl="com.jiang.generator.plugins.SimpleIntrospectedColumn">
+        <!--是否自动为keywords添加分隔符  TRUE  添加-->
+        <property name="autoDelimitKeywords" value="true"/>
+
+        <!--分隔符-->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://git.yuansuju.com:3306/yuansuju?useSSL=false">
+            <property name="user" value="root"/>
+            <property name="password" value="Xihe123456"/>
+        </jdbcConnection>
+        <javaTypeResolver>
+            <!--是否需要将数字映射为BigDecimal-->
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="com.jiang.iotwaste.model" targetProject="src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="mybatis" targetProject="src/main/resources">
+
+        </sqlMapGenerator>
+        <javaClientGenerator type="" targetPackage="com.jiang.iotwaste.mapper" targetProject="src/main/java">
+            <property name="jiang-define-root-interface" value="com.jiang.iotwaste.base.BaseMapper"/>
+        </javaClientGenerator>
+        <table tableName="admin_role" domainObjectName="YuansujuAdminRole">
+
+        </table>
+    </context>
+</generatorConfiguration>

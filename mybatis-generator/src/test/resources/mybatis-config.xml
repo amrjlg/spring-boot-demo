@@ -15,6 +15,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mybatis/AccountInfoMapper.xml" />
+        <mapper resource="mybatis/AnnouncementMapper.xml" />
     </mappers>
 </configuration>

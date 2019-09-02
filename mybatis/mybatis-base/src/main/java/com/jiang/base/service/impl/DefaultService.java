@@ -1,19 +1,24 @@
-package com.jiang.iotwaste.base;
+package com.jiang.base.service.impl;
 
 
-import com.jiang.iotwaste.base.BaseMapper;
+import com.jiang.base.dao.BaseMapper;
+import com.jiang.base.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 /**
+ * 公共service的默认实现
+ *
  * @author jiang
  * @date 2018/12/13
  * @time 14:43
  **/
-public abstract class DefaultService<Type,Example> implements BaseService<Type,Example> {
+public abstract class DefaultService<Type, Example> implements BaseService<Type, Example> {
+
     @Autowired
-    protected BaseMapper<Type,Example> mapper;
+    protected BaseMapper<Type, Example> mapper;
+
 
     @Override
     public long countByExample(Example example) {
@@ -52,12 +57,12 @@ public abstract class DefaultService<Type,Example> implements BaseService<Type,E
 
     @Override
     public int updateByExampleSelective(Type record, Example example) {
-        return mapper.updateByExampleSelective(record,example);
+        return mapper.updateByExampleSelective(record, example);
     }
 
     @Override
     public int updateByExample(Type record, Example example) {
-        return mapper.updateByExample(record,example);
+        return mapper.updateByExample(record, example);
     }
 
     @Override

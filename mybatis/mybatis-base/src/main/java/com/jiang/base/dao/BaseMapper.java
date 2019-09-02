@@ -1,13 +1,17 @@
-package com.jiang.iotwaste.base;
+package com.jiang.base.dao;
+
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
- * @author jiang
- * @date 2018/12/13
- * @time 14:41
- **/
-public interface BaseService<Type,Example> {
+ * mapper 抽象
+ *
+ * @author Jiang
+ * @date 2018/12/6
+ * @time 14:17
+ */
+public interface BaseMapper<Type, Example> {
     long countByExample(Example example);
 
     int deleteByExample(Example example);
@@ -22,9 +26,9 @@ public interface BaseService<Type,Example> {
 
     Type selectByPrimaryKey(Object id);
 
-    int updateByExampleSelective(Type record, Example example);
+    int updateByExampleSelective(@Param("record") Type record, @Param("example") Example example);
 
-    int updateByExample(Type record, Example example);
+    int updateByExample(@Param("record") Type record, @Param("example") Example example);
 
     int updateByPrimaryKeySelective(Type record);
 

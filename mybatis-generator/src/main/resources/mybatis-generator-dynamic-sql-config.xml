@@ -21,14 +21,14 @@
             <!--是否需要将数字映射为BigDecimal-->
             <property name="forceBigDecimals" value="true"/>
         </javaTypeResolver>
-        <javaModelGenerator targetPackage="com.jiang.iotwaste.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.jiang.uwaytech.model" targetProject="src/main/java">
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <sqlMapGenerator targetPackage="mybatis" targetProject="src/main/resources">
 
         </sqlMapGenerator>
-        <javaClientGenerator type="" targetPackage="com.jiang.iotwaste.mapper" targetProject="src/main/java">
-            <property name="jiang-define-root-interface" value="com.jiang.iotwaste.base.BaseMapper"/>
+        <javaClientGenerator type="" targetPackage="com.jiang.uwaytech.mapper" targetProject="src/main/java">
+            <property name="jiang-define-root-interface" value="com.jiang.uwaytech.base.BaseMapper"/>
         </javaClientGenerator>
         <table tableName="admin_role" domainObjectName="YuansujuAdminRole">
 

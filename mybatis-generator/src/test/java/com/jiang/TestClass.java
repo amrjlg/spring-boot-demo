@@ -25,15 +25,10 @@ public class TestClass {
         boolean overwrite = true;
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(getClass().getClassLoader().getResourceAsStream(location));
+
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, new DefaultShellCallback(overwrite), warnings);
         logger.info("generate is begin !");
         myBatisGenerator.generate(null);
         logger.info("generate is end !");
-    }
-    @Test
-    public void reg(){
-        String str = "aa\"0\"1\"2\"3\"4\"5\"6\n\rb\r\nc";
-        System.out.println(str);
-        System.out.println(str.replace("\r","").replace("\n","").replace("\"",""));
     }
 }

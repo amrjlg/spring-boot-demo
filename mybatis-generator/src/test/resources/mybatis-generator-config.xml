@@ -3,6 +3,8 @@
         "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
+    <properties resource="database.properties" />
+
     <context id="default-context" defaultModelType="flat" targetRuntime="MyBatis3"
              introspectedColumnImpl="com.jiang.generator.plugins.SimpleIntrospectedColumn">
         <!--是否自动为keywords添加分隔符  TRUE  添加-->
@@ -34,30 +36,30 @@
             <!--是否生成注释-->
             <property name="suppressAllComments" value="false"/>
             <!--是否添加文件生成时间-->
-            <property name="suppressDate" value="false"/>
+            <property name="suppressDate" value="true"/>
             <!--是否添加注释-->
             <property name="addRemarkComments" value="false"/>
+
             <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
         </commentGenerator>
 
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.1.100:3308/user_center_dev?useSSL=false">
-            <property name="user" value="root"/>
-            <property name="password" value="test123"/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${url}">
+            <property name="user" value="${user}"/>
+            <property name="password" value="${pass}"/>
         </jdbcConnection>
         <javaTypeResolver>
             <!--是否需要将数字映射为BigDecimal-->
             <property name="forceBigDecimals" value="true"/>
         </javaTypeResolver>
-        <javaModelGenerator targetPackage="com.jiang.uwaytech.model" targetProject="src/main/java">
-            <property name="trimStrings" value="true"/>
+        <javaModelGenerator targetPackage="com.jiang.model" targetProject="src/test/java">
+
         </javaModelGenerator>
-        <sqlMapGenerator targetPackage="mybatis" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mybatis" targetProject="src/test/resources">
 
         </sqlMapGenerator>
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.uwaytech.mapper" targetProject="src/main/java">
-            <property name="jiang-define-root-interface" value="com.jiang.uwaytech.base.BaseMapper"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.mapper" targetProject="src/test/java">
+
         </javaClientGenerator>
-        <table tableName="account_info" domainObjectName="AccountInfo"/>
+        <table tableName="announcement" domainObjectName="Announcement"/>
     </context>
 </generatorConfiguration>

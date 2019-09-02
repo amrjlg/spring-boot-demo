@@ -38,11 +38,11 @@ public class ControllerPlugin extends PluginAdapter {
     @Override
     public void setProperties(Properties properties) {
         super.setProperties(properties);
-        controllerPackage = properties.getProperty(Config.CONTROLLER_PACKAGE.getProperty());
-        restController = StringUtility.stringHasValue(properties.getProperty(Config.REST_CONTROLLER.getProperty()));
-        controller = StringUtility.stringHasValue(properties.getProperty(Config.CONTROLLER.getProperty()));
-        controllerProject = properties.getProperty(Config.CONTROLLER_PROJECT.getProperty());
-        servicePackage = properties.getProperty(Config.SERVICE_PACKAGE.getProperty(), "com.jiang.web.service");
+        controllerPackage = properties.getProperty(Config.CONTROLLER_PACKAGE.getProperty(),"com.jiang.web.controller");
+        restController = StringUtility.stringHasValue(properties.getProperty(Config.REST_CONTROLLER.getProperty(),"true"));
+        controller = StringUtility.stringHasValue(properties.getProperty(Config.CONTROLLER.getProperty(),"true"));
+        controllerProject = properties.getProperty(Config.CONTROLLER_PROJECT.getProperty(),"src/main/java");
+        servicePackage = properties.getProperty(Config.SERVICE_PACKAGE.getProperty(), "com.jiang.service");
         baseController =  properties.getProperty(Config.CLIENT_ROOT_INTERFACE.getProperty());
         modelPackage  = context.getJavaModelGeneratorConfiguration().getTargetPackage();
     }

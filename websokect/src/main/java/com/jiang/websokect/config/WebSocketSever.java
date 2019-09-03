@@ -2,6 +2,7 @@ package com.jiang.websokect.config;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+import java.util.Set;
 
 /**
  * @author Jiang
@@ -20,8 +21,10 @@ public class WebSocketSever {
         System.out.println("close");
     }
     @OnMessage
-    public void message(String message){
+    public void message(Session session,String message){
         System.out.println("message:"+message);
+        Set<MessageHandler> messageHandlers = session.getMessageHandlers();
+
     }
     @OnError
     public void error(Session session, Throwable error){

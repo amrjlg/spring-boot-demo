@@ -15,7 +15,6 @@
         <module>redis-config</module>
         <module>mybatis</module>
         <module>jpa</module>
-        <module>mybatis-generator</module>
         <module>test</module>
     </modules>
 

@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mybatis-base</module>
+        <module>mybatis-generator</module>
     </modules>
     <properties>
         <mysql.version>5.1.47</mysql.version>

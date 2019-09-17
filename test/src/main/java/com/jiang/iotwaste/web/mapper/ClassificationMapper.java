@@ -1,6 +1,6 @@
-package com.jiang.uwaytech.web.mapper;
+package com.jiang.iotwaste.web.mapper;
 
-import com.jiang.uwaytech.web.model.Classification;
+import com.jiang.iotwaste.web.model.Classification;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,9 +1,9 @@
 package com.jiang.mybatis;
 
 
-import com.jiang.uwaytech.web.mapper.ClassificationMapper;
-import com.jiang.uwaytech.web.model.Classification;
-import com.jiang.uwaytech.web.model.ClassificationChildren;
+import com.jiang.iotwaste.web.mapper.ClassificationMapper;
+import com.jiang.iotwaste.web.model.Classification;
+import com.jiang.iotwaste.web.model.ClassificationChildren;
 import org.apache.ibatis.builder.xml.XMLMapperBuilder;
 import org.apache.ibatis.datasource.unpooled.UnpooledDataSource;
 import org.apache.ibatis.io.Resources;
@@ -11,12 +11,15 @@ import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.session.TransactionIsolationLevel;
+import org.apache.ibatis.transaction.Transaction;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.junit.Test;
 
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**

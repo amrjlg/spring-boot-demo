@@ -1,4 +1,4 @@
-package com.jiang.uwaytech.web.model;
+package com.jiang.iotwaste.web.model;
 
 import lombok.Data;
 

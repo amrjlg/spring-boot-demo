@@ -11,21 +11,21 @@
         <!--分隔符-->
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
-<!--        &lt;!&ndash;生成service层插件&ndash;&gt;
+        <!--生成service层插件-->
         <plugin type="com.jiang.generator.plugins.ServicePlugin">
             <property name="service-project" value="src\main\java"/>
-            <property name="service-package" value="com.jiang.uwaytech.web.service"/>
-            <property name="jiang-define-root-interface" value="com.jiang.uwaytech.base.BaseService" />
-            <property name="service-impl" value="com.jiang.uwaytech.base.DefaultService"/>
+            <property name="service-package" value="com.jiang.iotwaste.web.service"/>
+            <property name="jiang-define-root-interface" value="com.jiang.iotwaste.base.BaseService" />
+            <property name="service-impl" value="com.jiang.iotwaste.base.DefaultService"/>
         </plugin>
         <plugin type="com.jiang.generator.plugins.ControllerPlugin">
             <property name="controller-project" value="src\main\java"/>
-            <property name="controller-package" value="com.jiang.uwaytech.web.controller"/>
-            <property name="jiang-define-root-interface" value="com.jiang.uwaytech.base.BaseController" />
-            <property name="service-package" value="com.jiang.uwaytech.web.service"/>
+            <property name="controller-package" value="com.jiang.iotwaste.web.controller"/>
+            <property name="jiang-define-root-interface" value="com.jiang.iotwaste.base.BaseController" />
+            <property name="service-package" value="com.jiang.iotwaste.web.service"/>
             <property name="rest-controller" value="true"/>
             <property name="controller" value="true"/>
-        </plugin>-->
+        </plugin>
         <!--mapper插件-->
         <plugin type="com.jiang.generator.plugins.MapperPlugin"/>
 
@@ -41,23 +41,23 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.1.100:3308/user_center_dev?useSSL=false">
+                        connectionURL="jdbc:mysql://git.yuansuju.com:3306/yuansuju?useSSL=false">
             <property name="user" value="root"/>
-            <property name="password" value="test123"/>
+            <property name="password" value="Xihe123456"/>
         </jdbcConnection>
         <javaTypeResolver>
             <!--是否需要将数字映射为BigDecimal-->
             <property name="forceBigDecimals" value="true"/>
         </javaTypeResolver>
-        <javaModelGenerator targetPackage="com.jiang.uwaytech.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.jiang.iotwaste.model" targetProject="src/main/java">
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <sqlMapGenerator targetPackage="mybatis" targetProject="src/main/resources">
 
         </sqlMapGenerator>
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.uwaytech.mapper" targetProject="src/main/java">
-            <property name="jiang-define-root-interface" value="com.jiang.uwaytech.base.BaseMapper"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.iotwaste.mapper" targetProject="src/main/java">
+            <property name="jiang-define-root-interface" value="com.jiang.iotwaste.base.BaseMapper"/>
         </javaClientGenerator>
-        <table tableName="account_info" domainObjectName="AccountInfo"/>
+        <table tableName="admin_role" domainObjectName="YuansujuAdminRole"/>
     </context>
 </generatorConfiguration>

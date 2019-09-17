@@ -8,13 +8,14 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://192.168.1.100:3308/e_test?useSSL=false"/>
+                <property name="url" value="jdbc:mysql://git.yuansuju.com:3306/yuansuju?useSSL=false"/>
                 <property name="username" value="root"/>
-                <property name="password" value="test123"/>
+                <property name="password" value="Xihe123456"/>
             </dataSource>
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mybatis/AccountInfoMapper.xml" />
+        <mapper resource="mybatis/YuansujuAdminRoleMapper.xml" />
+        <mapper resource="mybatis/YuansujuFileMapper.xml" />
     </mappers>
 </configuration>

@@ -15,12 +15,12 @@
         <dependency>
             <groupId>com.jiang.demo</groupId>
             <artifactId>swagger-module</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.jiang.demo</groupId>
             <artifactId>redis-config</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.session</groupId>

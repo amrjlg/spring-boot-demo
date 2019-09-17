@@ -1,5 +1,6 @@
 package com.jiang;
 
+import com.jiang.generator.callback.GeneratorShellCallback;
 import org.junit.Test;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
@@ -26,7 +27,7 @@ public class TestClass {
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(getClass().getClassLoader().getResourceAsStream(location));
 
-        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, new DefaultShellCallback(overwrite), warnings);
+        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, new GeneratorShellCallback(overwrite), warnings);
         logger.info("generate is begin !");
         myBatisGenerator.generate(null);
         logger.info("generate is end !");

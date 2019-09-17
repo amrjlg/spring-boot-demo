@@ -157,6 +157,9 @@ public class MapperPlugin extends PluginAdapter {
     }
     private void parseCriteriaClassMethods(TopLevelClass criteriaClass){
         methods.forEach(method -> {
+            method.addJavaDocLine("/**");
+            method.addJavaDocLine("* @mbg.generated");
+            method.addJavaDocLine("*/");
             method.setReturnType(criteriaClass.getType());
             List<String> bodyLines = method.getBodyLines();
             bodyLines.set(bodyLines.size()-1,"return this;");

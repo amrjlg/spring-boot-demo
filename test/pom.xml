@@ -18,18 +18,18 @@
         <!--<dependency>-->
             <!--<groupId>com.jiang.demo</groupId>-->
             <!--<artifactId>mybatis-generator</artifactId>-->
-            <!--<version>${version}</version>-->
+            <!--<version>${project.version}</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
             <!--<groupId>com.jiang.demo</groupId>-->
             <!--<artifactId>swagger-module</artifactId>-->
-            <!--<version>${version}</version>-->
+            <!--<version>${project.version}</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
             <!--<groupId>com.jiang.demo</groupId>-->
             <!--<artifactId>jpa</artifactId>-->
-            <!--<version>${version}</version>-->
+            <!--<version>${project.version}</version>-->
         <!--</dependency>-->
         <dependency>
             <groupId>junit</groupId>

@@ -60,6 +60,6 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.mapper" targetProject="src/test/java">
 
         </javaClientGenerator>
-        <table tableName="announcement" domainObjectName="Announcement"/>
+        <table tableName="admin_operator" domainObjectName="AdminOperator"/>
     </context>
 </generatorConfiguration>

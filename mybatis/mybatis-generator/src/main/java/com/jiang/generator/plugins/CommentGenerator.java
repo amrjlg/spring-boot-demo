@@ -4,7 +4,6 @@ import com.jiang.generator.enums.ImportType;
 import com.jiang.generator.utils.ClassUtil;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
-import org.mybatis.generator.api.dom.java.CompilationUnit;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.InnerClass;
 import org.mybatis.generator.api.dom.java.Method;
@@ -19,7 +18,10 @@ public class CommentGenerator extends DefaultCommentGenerator {
 
     @Override
     public void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-        String remarks = introspectedColumn.getRemarks().trim().replace("\"", "").replace("\n","").replace("\r","");
+        String remarks = introspectedColumn.getRemarks().trim()
+                .replace("\"", "")
+                .replace("\n","")
+                .replace("\r","");
         field.addJavaDocLine("/**");
         field.addJavaDocLine(" * " + remarks);
         addJavadocTag(field, false);
@@ -37,16 +39,16 @@ public class CommentGenerator extends DefaultCommentGenerator {
 
     @Override
     public void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable, boolean markAsDoNotDelete) {
-        innerClass.addJavaDocLine("/**"); //$NON-NLS-1$
+        innerClass.addJavaDocLine("/**"); 
         addJavadocTag(innerClass, true);
-        innerClass.addJavaDocLine(" */"); //$NON-NLS-1$
+        innerClass.addJavaDocLine(" */"); 
     }
 
     @Override
     public void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable) {
-        method.addJavaDocLine("/**"); //$NON-NLS-1$
+        method.addJavaDocLine("/**"); 
         addJavadocTag(method, true);
-        method.addJavaDocLine(" */"); //$NON-NLS-1$
+        method.addJavaDocLine(" */"); 
     }
 
     @Override

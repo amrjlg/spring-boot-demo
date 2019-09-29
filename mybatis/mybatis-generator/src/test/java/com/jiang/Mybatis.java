@@ -1,5 +1,9 @@
 package com.jiang;
 
+import com.jiang.mapper.AdModelMapper;
+import com.jiang.model.AdModel;
+import com.jiang.model.AdModelCriteria;
+import com.jiang.model.AdModelExample;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -11,6 +15,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author jiang
@@ -25,25 +30,23 @@ public class Mybatis {
     private SqlSessionFactory factory;
     private SqlSession sqlSession;
 
+    private AdModelMapper mapper;
     @Before
     public void before() throws IOException {
         InputStream stream = Resources.getResourceAsStream("mybatis-config.xml");
         factory = new SqlSessionFactoryBuilder().build(stream);
         sqlSession = factory.openSession();
-//        mapper = sqlSession.getMapper(AnnouncementMapper.class);
+        mapper = sqlSession.getMapper(AdModelMapper.class);
     }
 
     @Test
     public void insert() {
+        AdModelExample example = new AdModelExample();
 
-//        Announcement announcement = new Announcement();
-//        announcement.setId(1L);
-//        announcement.setCreateDate(new Date());
-//        announcement.setTitle("测试 - insert()");
-//        announcement.setDigest("Digest");
-//        announcement.setType(1);
-//        int insert = mapper.insert(announcement);
-//        log.info("mapper.insert(announcement) : {}",insert);
+        example.or().andTypeEqualTo(1).andDigestEqualTo("1");
+        example.or().andTypeEqualTo(2).andDigestEqualTo("1");
+
+        List<AdModel> adModels = mapper.selectByExample(example);
     }
 
 

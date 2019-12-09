@@ -3,7 +3,7 @@
         "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <properties resource="database.properties" />
+    <properties resource="database.properties"/>
 
     <context id="default-context" defaultModelType="flat" targetRuntime="MyBatis3"
              introspectedColumnImpl="com.jiang.generator.plugins.SimpleIntrospectedColumn">
@@ -50,6 +50,8 @@
         <javaTypeResolver>
             <!--是否需要将数字映射为BigDecimal-->
             <property name="forceBigDecimals" value="true"/>
+            <!--      时间类型 生成方式按照jdk8新增类型 如 LocalDateTime LocalDate LocalTime    -->
+<!--            <property name="useJSR310Types" value="true"/>-->
         </javaTypeResolver>
         <javaModelGenerator targetPackage="com.jiang.model" targetProject="src/test/java">
 
@@ -60,6 +62,6 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.jiang.mapper" targetProject="src/test/java">
 
         </javaClientGenerator>
-        <table tableName="admin_operator" domainObjectName="AdminOperator"/>
+        <table tableName="im_message" domainObjectName="Message"/>
     </context>
 </generatorConfiguration>

@@ -6,7 +6,7 @@
 
     <groupId>com.jiang.demo</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0</version>
+    <version>1.0-snapshot</version>
     <modules>
         <module>websokect</module>
         <module>cache</module>
@@ -47,6 +47,12 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.70</version>
+                <scope>compile</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

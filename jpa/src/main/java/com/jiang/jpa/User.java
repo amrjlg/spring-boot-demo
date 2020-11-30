@@ -11,11 +11,11 @@ import java.util.Date;
 @Entity
 @Table(name = "tb_user")
 @Data
-public class UserTest {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private int id;
     @Column(name = "user_name")
     private String userName;
     @Column(name = "salt")
